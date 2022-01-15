@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  minecraft-server:
+    container_name: minecraft-server
+
+    # # Local build (from https://github.com/itzg/docker-minecraft-server)
+    # build:
+    #   context: ./docker-minecraft-server
+    #   args:
+    #     TARGETOS: "linux"
+    #     TARGETARCH: "amd64"
+    #     TARGETVARIANT: ""
+
+    image: itzg/minecraft-server
+
+    environment:
+      EULA: "true"
+      TYPE: VANILLA # or PAPER
+      VERSION: LATEST # or 1.17.1
+
+      MEMORY: "1G"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "minecraft"
+      SERVER_NAME: "suiljex's Docker Server"
+      MOTD: "suiljex's Docker Server"
+      ONLINE_MODE: "false"
+    ports:
+      - 25565:25565
+      - 25575:25575
+    networks:
+      - minecraft
+    volumes:
+      - ./.data:/data
+    restart: always
+
+networks:
+  minecraft:
+    external: false
+

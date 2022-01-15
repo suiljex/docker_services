@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  murmur:
+    container_name: murmur
+
+    # # Local build (from https://github.com/goofball222/murmur)
+    # build:
+    #   context: ./murmur/stable
+    #   args:
+    #     BUILD_DATE: ""
+    #     VCS_REF: ""
+    #     VERSION: "1.3.4"
+
+    image: goofball222/murmur
+
+    ports:
+      - 64738:64738/tcp
+      - 64738:64738/udp
+    networks:
+      - murmur
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./.data/cert:/opt/murmur/cert
+      - ./.data/config:/opt/murmur/config
+      - ./.data/data:/opt/murmur/data
+      - ./.data/log:/opt/murmur/log
+    environment:
+      TZ: "UTC"
+      #MURMUR_SUPW: "" #Superuser password
+    restart: always
+
+networks:
+  murmur:
+    external: false
