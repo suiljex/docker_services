@@ -61,7 +61,7 @@ docker-compose exec prosody prosodyctl cert generate room.example.com
 ### Edit `prosody.cfg.lua` and `docker-compose.yml`
 
 - Add users to `admins = { }` in `prosody.cfg.lua` (line 24)
-- Add hosts to `prosody.cfg.lua` (lines 205, 207)
+- Add hosts to `prosody.cfg.lua` (lines 202, 204)
 
 ``` lua
 VirtualHost "chat.example.com"
@@ -85,4 +85,10 @@ Register User
 docker-compose exec prosody /usr/bin/prosodyctl adduser user0@example.com
 # For batch registration of accounts consider the ‘prosodyctl register’ command, which allows you to specify everything on one line
 docker-compose exec prosody /usr/bin/prosodyctl register user0 example.com passw0rd
+```
+
+If you have been using Let's Encrypt to obtain certificates, now is the time to run
+
+``` bash
+docker-compose exec prosody /usr/bin/prosodyctl --root cert import /etc/letsencrypt/live
 ```

@@ -199,9 +199,6 @@ certificates = "certs"
 VirtualHost "localhost"
   certificate = "/var/lib/prosody/localhost.crt"
 
---VirtualHost "example.com"
---      certificate = "/path/to/example.crt"
-
 VirtualHost "chat.example.com"
 
 Component "room.example.com" "muc"
