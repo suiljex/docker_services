@@ -1,4 +1,4 @@
-# Ejabberd
+# Prosody
 
 Download scripts
 
@@ -61,13 +61,12 @@ docker-compose exec prosody prosodyctl cert generate room.example.com
 ### Edit `prosody.cfg.lua` and `docker-compose.yml`
 
 - Add users to `admins = { }` in `prosody.cfg.lua` (line 24)
-- Add hosts to `prosody.cfg.lua` (lines 202, 204)
+- Change hosts in `prosody.cfg.lua` (lines 3-5)
 
 ``` lua
-VirtualHost "chat.example.com"
-
-Component "room.example.com" "muc"
-    modules_enabled = { "mam_muc"; }
+local host_base = "example.com"
+local host_chat = "chat." .. host_base
+local host_room = "room." .. host_base
 ```
 
 ### Start service

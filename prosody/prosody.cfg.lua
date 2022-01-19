@@ -1,4 +1,9 @@
 daemonize = false;
+
+local host_base = "example.com"
+local host_chat = "chat." .. host_base
+local host_room = "room." .. host_base
+
 -- Prosody XMPP Server Configuration
 --
 -- Information on configuring Prosody can be found on our
@@ -196,12 +201,12 @@ certificates = "certs"
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
 -- Settings under each VirtualHost entry apply *only* to that host.
 
-VirtualHost "localhost"
-  certificate = "/var/lib/prosody/localhost.crt"
+-- VirtualHost "localhost"
+--   certificate = "/var/lib/prosody/localhost.crt"
 
-VirtualHost "chat.example.com"
+VirtualHost(host_chat)
 
-Component "room.example.com" "muc"
+Component(host_room, "muc")
     modules_enabled = { "mam_muc"; }
 
 ------ Components ------
