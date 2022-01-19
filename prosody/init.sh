@@ -10,3 +10,4 @@ mkdir --parents ./.data/prosody/certs
 mkdir --parents ./.data/prosody/logs
 mkdir --parents ./.data/prosody/modules
 mkdir --parents ./.data/prosody/data
+mkdir --parents ./.data/letsencrypt

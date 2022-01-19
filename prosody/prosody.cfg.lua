@@ -59,8 +59,8 @@ modules_enabled = {
                 "time"; -- Let others know the time here on this server
                 "ping"; -- Replies to XMPP pings with pongs
                 "register"; -- Allow users to register on this server using a client and change passwords
-                --"mam"; -- Store messages in an archive and allow users to access it
-                --"csi_simple"; -- Simple Mobile optimizations
+                "mam"; -- Store messages in an archive and allow users to access it
+                "csi_simple"; -- Simple Mobile optimizations
 
         -- Admin interfaces
                 "admin_adhoc"; -- Allows administration via an XMPP client that supports ad-hoc commands
@@ -69,12 +69,12 @@ modules_enabled = {
         -- HTTP modules
                 --"bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
                 --"websocket"; -- XMPP over WebSockets
-                --"http_files"; -- Serve static files from a directory over HTTP
+                "http_files"; -- Serve static files from a directory over HTTP
 
         -- Other specific functionality
                 --"groups"; -- Shared roster support
                 --"server_contact_info"; -- Publish contact information for this service
-                --"announce"; -- Send announcement to all online users
+                "announce"; -- Send announcement to all online users
                 --"welcome"; -- Welcome users who register accounts
                 --"watchregistrations"; -- Alert admins of registrations
                 --"motd"; -- Send a message to users when they log in
@@ -201,6 +201,11 @@ VirtualHost "localhost"
 
 --VirtualHost "example.com"
 --      certificate = "/path/to/example.crt"
+
+VirtualHost "chat.example.com"
+
+Component "room.example.com" "muc"
+    modules_enabled = { "mam_muc"; }
 
 ------ Components ------
 -- You can specify components to add hosts that provide special services,
