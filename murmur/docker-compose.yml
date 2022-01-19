@@ -21,10 +21,10 @@ services:
       - murmur
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./.data/cert:/opt/murmur/cert
-      - ./.data/config:/opt/murmur/config
-      - ./.data/data:/opt/murmur/data
-      - ./.data/log:/opt/murmur/log
+      - ./.data/murmur/cert:/opt/murmur/cert
+      - ./.data/murmur/config:/opt/murmur/config
+      - ./.data/murmur/data:/opt/murmur/data
+      - ./.data/murmur/log:/opt/murmur/log
     environment:
       TZ: "UTC"
       #MURMUR_SUPW: "" #Superuser password

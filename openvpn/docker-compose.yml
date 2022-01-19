@@ -16,7 +16,7 @@ services:
     networks:
       - openvpn
     volumes:
-      - ./.data:/etc/openvpn
+      - ./.data/openvpn:/etc/openvpn
     restart: always
 
 networks:

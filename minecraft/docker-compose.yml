@@ -31,7 +31,7 @@ services:
     networks:
       - minecraft
     volumes:
-      - ./.data:/data
+      - ./.data/minecraft:/data
     restart: always
 
 networks:

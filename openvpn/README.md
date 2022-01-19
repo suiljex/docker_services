@@ -2,7 +2,9 @@
 
 Download scripts
 
-    git clone https://github.com/dockovpn/docker-openvpn
+``` bash
+git clone https://github.com/dockovpn/docker-openvpn
+```
 
 ## Quick Start with docker-compose
 
