@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  prosody:
+    container_name: prosody
+
+    # # Local build (from https://github.com/prosody/prosody-docker)
+    # # Not reproducible
+    # build:
+    #   context: ./prosody-docker
+
+    image: prosody/prosody
+
+    user: root
+
+    environment:
+      # User creation
+      - LOCAL=admin
+      - DOMAIN=localhost
+      - PASSWORD=password
+    ports:
+      - "80:80"
+      - "5222:5222" # The default port for XMPP clients.
+      - "5269:5269" # For XMPP federation. Only needed if you want to communicate with users on other servers.
+      - "5347:5347" # XMPP component port
+      - "5280:5280" # For admin interface.  BOSH / websocket port
+      - "5281:5281" # Secure BOSH / websocket port
+    networks:
+      - prosody
+    volumes:
+      - ./prosody.cfg.lua:/etc/prosody/prosody.cfg.lua:ro
+      # - ./.data/prosody/conf:/etc/prosody
+      - ./.data/prosody/certs:/etc/prosody/certs
+      - ./.data/prosody/logs:/var/log/prosody
+      - ./.data/prosody/modules:/usr/lib/prosody-modules
+      - ./.data/prosody/data:/var/lib/prosody
+    healthcheck:
+      test: netstat -nl | grep -q 5222
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 120
+    restart: always
+
+networks:
+  prosody:
+    external: false
