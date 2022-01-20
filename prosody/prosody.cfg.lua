@@ -87,6 +87,11 @@ modules_enabled = {
                 --"motd"; -- Send a message to users when they log in
                 --"legacyauth"; -- Legacy authentication. Only used by some old clients and bots.
                 "proxy65"; -- Enables a file transfer proxy service which clients behind NAT can use
+
+        -- Community
+                "smacks";
+                "bookmarks2";
+                "cloud_notify";
 }
 
 -- These modules are auto-loaded, but should you want
@@ -152,10 +157,10 @@ authentication = "internal_hashed"
 -- through modules. An "sql" backend is included by default, but requires
 -- additional dependencies. See https://prosody.im/doc/storage for more info.
 
---storage = "sql" -- Default is "internal"
+storage = "sql" -- Default is "internal"
 
 -- For the "sql" backend, you can uncomment *one* of the below to configure:
---sql = { driver = "SQLite3", database = "prosody.sqlite" } -- Default. 'database' is the filename.
+sql = { driver = "SQLite3", database = "prosody.sqlite" } -- Default. 'database' is the filename.
 --sql = { driver = "MySQL", database = "prosody", username = "prosody", password = "secret", host = "localhost" }
 --sql = { driver = "PostgreSQL", database = "prosody", username = "prosody", password = "secret", host = "localhost" }
 
@@ -216,11 +221,9 @@ proxy65_ports = { 5000  }
 
 VirtualHost(host_chat)
   disco_items = {
-    {
-      host_room,
-      host_upload,
-      host_proxy,
-    },
+    { host_room, "Channels" };
+    { host_upload, "HTTP upload" };
+    { host_proxy, "Proxy" };
   }
 
 ------ Components ------
@@ -242,12 +245,15 @@ VirtualHost(host_chat)
 --Component "gateway.example.com"
 --      component_secret = "password"
 
-Component(host_room, "muc")
-  modules_enabled = { "muc_mam"; }
+Component(host_room) "muc"
+  modules_enabled = {
+    "muc_mam";
+    "vcard_muc";
+  }
 
-Component(host_upload, "http_upload")
+Component(host_upload) "http_upload"
   modules_enabled = {
     "http_upload"; -- Enables file sharing between users
   }
 
-Component(host_proxy, "proxy65")
+Component(host_proxy) "proxy65"

@@ -21,3 +21,6 @@ hg clone 'https://hg.prosody.im/prosody-modules/' ./.data/prosody/modules/availa
 cd "$SCRIPT_FULL_PATH"/.data/prosody/modules/enabled
 enable_module mod_http_upload
 enable_module mod_smacks
+enable_module mod_vcard_muc
+enable_module mod_bookmarks2
+enable_module mod_cloud_notify
