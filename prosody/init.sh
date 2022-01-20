@@ -24,3 +24,4 @@ enable_module mod_smacks
 enable_module mod_vcard_muc
 enable_module mod_bookmarks2
 enable_module mod_cloud_notify
+enable_module mod_external_services

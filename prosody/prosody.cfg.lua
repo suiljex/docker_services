@@ -92,6 +92,7 @@ modules_enabled = {
     "smacks";
     "bookmarks2";
     "cloud_notify";
+    "external_services";
   }
 
 -- These modules are auto-loaded, but should you want
@@ -211,6 +212,22 @@ https_ports = { 5281 }
 https_interfaces = { "*", "::" }
 
 proxy65_ports = { 5000  }
+
+-- list of external services
+external_services = {
+  {
+    type = "stun",
+    transport = "udp",
+    host = host_proxy,
+    port = 3478
+  }, {
+    type = "turn",
+    transport = "udp",
+    host = host_proxy,
+    port = 3478,
+    secret = "passw0rd"
+  }
+}
 
 ----------- Virtual hosts -----------
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.

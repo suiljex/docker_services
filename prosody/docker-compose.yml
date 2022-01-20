@@ -44,6 +44,25 @@ services:
       retries: 120
     restart: always
 
+  coturn:
+    container_name: coturn
+
+    image: coturn/coturn
+
+    user: root
+
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "5349:5349"
+      - "5349:5349/udp"
+      - "49152-49280:49152-49280/udp"
+    networks:
+      - prosody
+    volumes:
+      - ./coturn.conf:/etc/coturn/turnserver.conf:ro
+    restart: always
+
 networks:
   prosody:
     external: false

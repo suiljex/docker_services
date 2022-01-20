@@ -75,6 +75,38 @@ local host_upload = "upload." .. host_base
 local host_proxy = "proxy." .. host_base
 ```
 
+- Change passwords in `coturn.conf` (line 244) and in `prosody.cfg.lua` (line 228)
+
+``` ini
+## coturn.conf ##
+static-auth-secret=passw0rd
+```
+
+``` lua
+-- prosody.cfg.lua --
+-- list of external services
+external_services = {
+  {
+    type = "stun",
+    transport = "udp",
+    host = host_proxy,
+    port = 3478
+  }, {
+    type = "turn",
+    transport = "udp",
+    host = host_proxy,
+    port = 3478,
+    secret = "passw0rd"
+  }
+}
+```
+
+- Change host in `coturn.conf` (line 358)
+
+``` ini
+realm=proxy.example.com
+```
+
 ### Start service
 
 Start the server/Install the server
