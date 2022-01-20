@@ -67,6 +67,11 @@ docker-compose exec prosody /usr/bin/prosodyctl cert generate proxy.example.com
 ### Edit `prosody.cfg.lua` and `docker-compose.yml`
 
 - Add users to `admins = { }` in `prosody.cfg.lua` (line 31)
+
+``` lua
+admins = { }
+```
+
 - Change hosts in `prosody.cfg.lua` (lines 3-7)
 
 ``` lua
