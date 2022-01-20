@@ -39,7 +39,13 @@ services:
   coturn:
     container_name: coturn
 
+    # # Local build (from https://github.com/coturn/coturn)
+    # # Not reproducible
+    # build:
+    #   context: ./coturn/docker/coturn/alpine
+
     image: coturn/coturn
+
     ports:
       - "3478:3478"
       - "3478:3478/udp"

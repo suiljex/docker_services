@@ -5,6 +5,7 @@ SCRIPT_FULL_PATH=$(dirname "$0")
 
 cd "$SCRIPT_FULL_PATH"
 git clone https://github.com/prosody/prosody-docker
+git clone https://github.com/coturn/coturn
 
 mkdir --parents ./.data/prosody/certs
 mkdir --parents ./.data/prosody/logs
