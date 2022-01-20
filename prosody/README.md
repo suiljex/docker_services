@@ -14,7 +14,7 @@
 
 Use Let's encrypt to get certificates for domains:
 
-- `chat.example.com`
+- `xmpp.example.com`
 - `room.example.com`
 - `upload.example.com`
 - `proxy.example.com`
@@ -34,7 +34,7 @@ docker run -it --rm --name certbot \
     -v "${PWD}/.data/letsencrypt:/etc/letsencrypt" \
     certbot/certbot certonly --standalone --noninteractive --agree-tos \
     --email user@email.com \
-    -d chat.example.com \
+    -d xmpp.example.com \
     -d room.example.com \
     -d upload.example.com \
     -d proxy.example.com
@@ -58,7 +58,7 @@ docker-compose exec prosody /usr/bin/prosodyctl --root cert import /etc/letsencr
 Alternatively you can generate self-signed certificate (don't do it)
 
 ``` bash
-docker-compose exec prosody /usr/bin/prosodyctl cert generate chat.example.com
+docker-compose exec prosody /usr/bin/prosodyctl cert generate xmpp.example.com
 docker-compose exec prosody /usr/bin/prosodyctl cert generate room.example.com
 docker-compose exec prosody /usr/bin/prosodyctl cert generate upload.example.com
 docker-compose exec prosody /usr/bin/prosodyctl cert generate proxy.example.com
@@ -71,7 +71,7 @@ docker-compose exec prosody /usr/bin/prosodyctl cert generate proxy.example.com
 
 ``` lua
 local host_base = "example.com"
-local host_chat = "chat." .. host_base
+local host_xmpp = "xmpp." .. host_base
 local host_room = "room." .. host_base
 local host_upload = "upload." .. host_base
 local host_proxy = "proxy." .. host_base

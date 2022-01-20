@@ -1,7 +1,7 @@
 daemonize = false;
 
 local host_base = "example.com"
-local host_chat = "chat." .. host_base
+local host_xmpp = "xmpp." .. host_base
 local host_room = "room." .. host_base
 local host_upload = "upload." .. host_base
 local host_proxy = "proxy." .. host_base
@@ -236,7 +236,7 @@ external_services = {
 -- VirtualHost "localhost"
 --   certificate = "/var/lib/prosody/localhost.crt"
 
-VirtualHost(host_chat)
+VirtualHost(host_xmpp)
   disco_items = {
     { host_room, "Channels" };
     { host_upload, "HTTP upload" };
