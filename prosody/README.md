@@ -8,7 +8,7 @@ git clone https://github.com/prosody/prosody-docker
 
 ## Setup
 
-### Edit DNS records for your XMPP server
+### Edit DNS records for your XMPP server (optional)
 
 ### Issue valid certificates
 
@@ -16,6 +16,8 @@ Use Let's encrypt to get certificates for domains:
 
 - `chat.example.com`
 - `room.example.com`
+- `upload.example.com`
+- `proxy.example.com`
 
 Certbot is loaded automatically. To get certificates run
 
@@ -33,7 +35,9 @@ docker run -it --rm --name certbot \
     certbot/certbot certonly --standalone --noninteractive --agree-tos \
     --email user@email.com \
     -d chat.example.com \
-    -d room.example.com
+    -d room.example.com \
+    -d upload.example.com \
+    -d proxy.example.com
 ```
 
 To renew certificates run
@@ -54,19 +58,23 @@ docker-compose exec prosody /usr/bin/prosodyctl --root cert import /etc/letsencr
 Alternatively you can generate self-signed certificate (don't do it)
 
 ``` bash
-docker-compose exec prosody prosodyctl cert generate chat.example.com
-docker-compose exec prosody prosodyctl cert generate room.example.com
+docker-compose exec prosody /usr/bin/prosodyctl cert generate chat.example.com
+docker-compose exec prosody /usr/bin/prosodyctl cert generate room.example.com
+docker-compose exec prosody /usr/bin/prosodyctl cert generate upload.example.com
+docker-compose exec prosody /usr/bin/prosodyctl cert generate proxy.example.com
 ```
 
 ### Edit `prosody.cfg.lua` and `docker-compose.yml`
 
-- Add users to `admins = { }` in `prosody.cfg.lua` (line 24)
-- Change hosts in `prosody.cfg.lua` (lines 3-5)
+- Add users to `admins = { }` in `prosody.cfg.lua` (line 31)
+- Change hosts in `prosody.cfg.lua` (lines 3-7)
 
 ``` lua
 local host_base = "example.com"
 local host_chat = "chat." .. host_base
 local host_room = "room." .. host_base
+local host_upload = "upload." .. host_base
+local host_proxy = "proxy." .. host_base
 ```
 
 ### Start service

@@ -25,6 +25,7 @@ services:
       - "5347:5347" # XMPP component port
       - "5280:5280" # For admin interface.  BOSH / websocket port
       - "5281:5281" # Secure BOSH / websocket port
+      - "5000:5000" # Proxy
     networks:
       - prosody
     volumes:

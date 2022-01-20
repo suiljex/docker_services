@@ -3,6 +3,8 @@ daemonize = false;
 local host_base = "example.com"
 local host_chat = "chat." .. host_base
 local host_room = "room." .. host_base
+local host_upload = "upload." .. host_base
+local host_proxy = "proxy." .. host_base
 
 -- Prosody XMPP Server Configuration
 --
@@ -35,7 +37,7 @@ admins = { }
 -- Prosody will always look in its source directory for modules, but
 -- this option allows you to specify additional locations where Prosody
 -- will look for modules first. For community modules, see https://modules.prosody.im/
---plugin_paths = {}
+plugin_paths = { "/usr/lib/prosody-modules/enabled" }
 
 -- This is the list of modules Prosody will load on startup.
 -- It looks for mod_modulename.lua in the plugins folder, so make sure that exists too.
@@ -84,7 +86,7 @@ modules_enabled = {
                 --"watchregistrations"; -- Alert admins of registrations
                 --"motd"; -- Send a message to users when they log in
                 --"legacyauth"; -- Legacy authentication. Only used by some old clients and bots.
-                --"proxy65"; -- Enables a file transfer proxy service which clients behind NAT can use
+                "proxy65"; -- Enables a file transfer proxy service which clients behind NAT can use
 }
 
 -- These modules are auto-loaded, but should you want
@@ -195,7 +197,15 @@ log = {
 certificates = "certs"
 
 -- HTTPS currently only supports a single certificate, specify it here:
---https_certificate = "/etc/prosody/certs/localhost.crt"
+https_certificate = "/etc/prosody/certs/" .. host_upload .. ".crt"
+
+http_ports = { 5280 }
+http_interfaces = { "*", "::" }
+
+https_ports = { 5281 }
+https_interfaces = { "*", "::" }
+
+proxy65_ports = { 5000  }
 
 ----------- Virtual hosts -----------
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
@@ -205,9 +215,13 @@ certificates = "certs"
 --   certificate = "/var/lib/prosody/localhost.crt"
 
 VirtualHost(host_chat)
-
-Component(host_room, "muc")
-    modules_enabled = { "mam_muc"; }
+  disco_items = {
+    {
+      host_room,
+      host_upload,
+      host_proxy,
+    },
+  }
 
 ------ Components ------
 -- You can specify components to add hosts that provide special services,
@@ -227,3 +241,13 @@ Component(host_room, "muc")
 --
 --Component "gateway.example.com"
 --      component_secret = "password"
+
+Component(host_room, "muc")
+  modules_enabled = { "muc_mam"; }
+
+Component(host_upload, "http_upload")
+  modules_enabled = {
+    "http_upload"; -- Enables file sharing between users
+  }
+
+Component(host_proxy, "proxy65")
