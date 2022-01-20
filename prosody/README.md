@@ -8,8 +8,6 @@
 
 ## Setup
 
-### Edit DNS records for your XMPP server (optional)
-
 ### Issue valid certificates
 
 Use Let's encrypt to get certificates for domains:
@@ -19,7 +17,7 @@ Use Let's encrypt to get certificates for domains:
 - `upload.example.com`
 - `proxy.example.com`
 
-Certbot is loaded automatically. To get certificates run
+To get certificates run
 
 ``` bash
 # In interactive mode
