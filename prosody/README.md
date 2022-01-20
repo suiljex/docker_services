@@ -75,6 +75,12 @@ local host_upload = "upload." .. host_base
 local host_proxy = "proxy." .. host_base
 ```
 
+- Change host in `coturn.conf` (line 358)
+
+``` ini
+realm=proxy.example.com
+```
+
 - Change passwords in `coturn.conf` (line 244) and in `prosody.cfg.lua` (line 228)
 
 ``` ini
@@ -101,12 +107,6 @@ external_services = {
 }
 ```
 
-- Change host in `coturn.conf` (line 358)
-
-``` ini
-realm=proxy.example.com
-```
-
 ### Start service
 
 Start the server/Install the server
@@ -124,7 +124,7 @@ docker-compose exec prosody /usr/bin/prosodyctl adduser user0@example.com
 docker-compose exec prosody /usr/bin/prosodyctl register user0 example.com passw0rd
 ```
 
-If you have been using Let's Encrypt to obtain certificates, now is the time to run
+If you used Let's Encrypt to get certificates in the previous steps, now is the time to run
 
 ``` bash
 docker-compose exec prosody /usr/bin/prosodyctl --root cert import /etc/letsencrypt/live
