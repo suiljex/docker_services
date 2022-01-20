@@ -1,9 +1,9 @@
 # Prosody
 
-Download scripts
+[GitHub Sources](https://github.com/prosody/prosody-docker)
 
 ``` bash
-git clone https://github.com/prosody/prosody-docker
+./init.sh
 ```
 
 ## Setup

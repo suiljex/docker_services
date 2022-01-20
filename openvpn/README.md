@@ -1,9 +1,9 @@
-# Mumble Server
+# Openvpn
 
-Download scripts
+[GitHub Sources](https://github.com/dockovpn/docker-openvpn)
 
 ``` bash
-git clone https://github.com/dockovpn/docker-openvpn
+./init.sh
 ```
 
 ## Quick Start with docker-compose

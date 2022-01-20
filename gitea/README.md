@@ -1,13 +1,15 @@
 # Gitea
 
-Download scripts
+[GitHub Sources](https://github.com/go-gitea/gitea)
 
-    git clone https://github.com/go-gitea/gitea
+``` bash
+./init.sh
+```
 
 Start server
 
-    docker-compose up --build --detach
+``` bash
+docker-compose up --build --detach
+```
 
-Find data at
-
-    ./.data
+Find data at `./.data/gitea`
