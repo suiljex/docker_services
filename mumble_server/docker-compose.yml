@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  mumble_server:
+    container_name: mumble_server
+
+    # # Local build (from https://github.com/mumble-voip/mumble-docker)
+    # build:
+    #   context: ./mumble-docker
+    #   args:
+    #     MUMBLE_VERSION: 'v1.4.230'
+
+    image: mumblevoip/mumble-server
+
+    ports:
+      - 64738:64738/tcp
+      - 64738:64738/udp
+    networks:
+      - mumble_server
+    volumes:
+      - ./.data/mumble_server/data/db:/data/db
+      - ./murmur.ini:/data/murmur.ini
+    environment:
+      TZ: 'UTC'
+    restart: always
+
+networks:
+  mumble_server:
+    external: false
