@@ -30,6 +30,20 @@ docker logs mumble_server 2>&1 | grep "Password for 'SuperUser'"
 
 ## SSL Certificates
 
+Edit SSL settings in `murmur.ini`:
+
+``` ini
+# SSL SETTINGS
+########################################
+certrequired=false
+sslCert=/data/cert.pem
+sslKey=/data/key.pem
+sslPassPhrase=
+;sslCA=/data/intermediate.pem
+sslCiphers=
+;sslDHParams=/data/dh.pem
+```
+
 - SSL certificate should be mounted at `/data/cert.pem`
 
 - SSL key should be mounted at `/data/key.pem`
